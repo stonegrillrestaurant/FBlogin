@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login with Facebook - Stone Grill Restaurant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      color: #333;
+    }
+    h1 {
+      color: #b22222;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sign in to Stone Grill</h1>
+
+  <div class="fb-login-button"
+       data-width=""
+       data-size="large"
+       data-button-type="continue_with"
+       data-layout="default"
+       data-auto-logout-link="false"
+       data-use-continue-as="true"
+       onlogin="checkLoginState();">
+  </div>
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '1931174884373345',
+        cookie: true,
+        xfbml: true,
+        version: 'v19.0'
+      });
+
+      FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+          window.location.href = 'home.html';
+        }
+      });
+    };
+
+    function checkLoginState() {
+      FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+          window.location.href = 'home.html';
+        } else {
+          alert('Login failed or cancelled.');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
