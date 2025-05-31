@@ -1,70 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Login with Facebook - Stone Grill Restaurant</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fff8f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      color: #333;
-    }
-    h1 {
-      color: #b22222;
-      margin-bottom: 20px;
-    }
-  </style>
+  <title>Welcome to Our Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
+  <h1>Welcome to Our Page</h1>
+  <div id="fb-root"></div>
 
-  <h1>Sign in to Stone Grill</h1>
-
-  <div class="fb-login-button"
-       data-width=""
-       data-size="large"
-       data-button-type="continue_with"
-       data-layout="default"
-       data-auto-logout-link="false"
-       data-use-continue-as="true"
+  <div class="fb-login-button" 
+       data-width="" 
+       data-size="large" 
+       data-button-type="login_with" 
+       data-layout="default" 
+       data-auto-logout-link="false" 
+       data-use-continue-as="false" 
+       data-scope="public_profile,email"
        onlogin="checkLoginState();">
   </div>
-
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_US/sdk.js"></script>
 
   <script>
     window.fbAsyncInit = function () {
       FB.init({
-        appId: '1931174884373345',
+        appId: '1043497450560746',
         cookie: true,
         xfbml: true,
         version: 'v19.0'
       });
 
-      FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-          window.location.href = 'home.html';
-        }
-      });
+      FB.AppEvents.logPageView();
     };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'facebook-jssdk');
 
     function checkLoginState() {
       FB.getLoginStatus(function (response) {
         if (response.status === 'connected') {
-          window.location.href = 'home.html';
+          window.location.href = "login-success.html";
         } else {
-          alert('Login failed or cancelled.');
+          alert("Facebook login failed.");
         }
       });
     }
   </script>
-
 </body>
 </html>
